@@ -9,7 +9,7 @@ def create_streamlit_app(llm, portfolio, clean_text):
 
     st.title('Cold email Generator')
 
-    url_input = st.text_input('Enter a URL:', value = "https://jobs.boehringer-ingelheim.com/job/Ridgefield%2C-CT-CMC-Regulatory-Data-Science-Co-Op-%28Hybrid%29-Unit/1368819133/")
+    url_input = st.text_input('Enter a URL:', value = "")
     submit_button = st.button('Submit')
 
     if submit_button:
@@ -18,10 +18,10 @@ def create_streamlit_app(llm, portfolio, clean_text):
             data = clean_text(loader.load().pop().page_content)
             portfolio.load_portfolio()
             jobs = llm.extract_jobs(data)
-            for job in jobs: 
+            for job in jobs:
                 skills = job.get('skills', [])
                 links = portfolio.query_links(skills)
-                email = llm.write_mail(jobs, links)
+                email = llm.write_mail(job, links)
                 st.code(email, language = 'markdown')
         except Exception as e:
             st.error(f'An Error Occured: {e}')

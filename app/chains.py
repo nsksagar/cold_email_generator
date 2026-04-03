@@ -69,6 +69,7 @@ class Chain:
         
         chain_email = prompt_email | self.llm 
         res = chain_email.invoke({'job_description' : str(job), 'link_list': links})
+        return res.content
         
     
         
