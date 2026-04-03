@@ -25,3 +25,14 @@ Enhanced automation for data ingestion and preprocessing
 💡 Goal
 To simplify and scale the job application process by generating high-quality, personalized cold emails with minimal manual effort.
 
+
+
+
+April/3/2026
+
+**Recent Updates:**
+
+Bug Fixes: Resolved an issue where the email generation output was displaying as `None` by ensuring the LLM response is properly returned to the main application block.
+
+UI Improvements: Cleared the default testing URL from the Streamlit input field, providing a clean, blank text area for the user to input their target job links.
+
