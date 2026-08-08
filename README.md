@@ -1,38 +1,65 @@
-April/2/2026
+# Cold Email Generator
 
-🚀 Cold Email Generator for Job Applications
-This application automates the process of generating personalized cold emails for job applications based on job postings and your professional profile.
-🔍 Overview
-The system analyzes job descriptions and matches them with your portfolio data to generate tailored cold emails that highlight relevant skills and experiences.
-Currently, the application:
-Extracts job-related information from structured inputs (CSV files)
-Uses your portfolio data to create context-aware email drafts
-Leverages large language models to generate high-quality, personalized outreach messages
-⚙️ Tech Stack
-LLM: LLaMA 3.3 (70B Versatile)
-Vector Database: ChromaDB (for semantic similarity and context retrieval)
-Inference Backend: Groq (for accelerated LLM performance)
-📂 Current Limitations
-Requires input data (e.g., portfolio or job listings) to be provided in CSV format
-Input files must be manually placed in the working directory
-🔄 Upcoming Improvements
-Support for multiple input formats:
-your_resume.pdf
-your_portfolios.csv
-Portfolio links (e.g., GitHub, personal website)
-More flexible and user-friendly input handling
-Enhanced automation for data ingestion and preprocessing
-💡 Goal
-To simplify and scale the job application process by generating high-quality, personalized cold emails with minimal manual effort.
+Generates personalized cold emails for job applications by matching a job posting against your portfolio data using a Large Language Model (LLM).
 
+## How it works
 
+1. Job details are read from a structured input (CSV).
+2. Portfolio data is queried from a vector database to find relevant skills/links for that job.
+3. An LLM drafts a personalized cold email using the job details + matched portfolio context.
 
+## Tech Stack
 
-April/3/2026
+- **LLM / Inference:** Groq API (LLaMA 3.3 70B)
+- **Orchestration:** LangChain, LangGraph
+- **Vector DB:** ChromaDB (semantic search over portfolio data)
+- **Data handling:** pandas
+- **Config:** python-dotenv
 
-**Recent Updates:**
+## Project Structure
 
-Bug Fixes: Resolved an issue where the email generation output was displaying as `None` by ensuring the LLM response is properly returned to the main application block.
+```
+cold_email_generator/
+├── app/                       # Application code (env config, core scripts)
+├── check_groq.ipynb           # Test/verify Groq API connectivity
+├── check_chromaDB.ipynb       # Test/verify ChromaDB setup and queries
+├── cold_email_generator.ipynb # Main pipeline: job data → portfolio match → email draft
+├── projects.csv               # Portfolio/project data used for context matching
+├── requirements.txt           # Python dependencies
+└── .vscode/                   # Editor config
+```
 
-UI Improvements: Cleared the default testing URL from the Streamlit input field, providing a clean, blank text area for the user to input their target job links.
+## Setup
 
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/nsksagar/cold_email_generator.git
+   cd cold_email_generator
+   ```
+
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Get a Groq API key from [console.groq.com/keys](https://console.groq.com/keys) and add it to a `.env` file in `app/`:
+   ```
+   GROQ_API_KEY=your_api_key_here
+   ```
+
+4. Run `cold_email_generator.ipynb` to generate emails. Use `check_groq.ipynb` and `check_chromaDB.ipynb` to verify your API key and vector DB setup independently.
+
+## Current Limitations
+
+- Input must be provided as CSV (job listings, portfolio data).
+- Input files must be manually placed in the working directory.
+
+## Upcoming Improvements
+
+- Support for resume PDF and portfolio link inputs (not just CSV)
+- More flexible input handling
+- Better automation for data ingestion/preprocessing
+
+## License
+
+Not specified.
